@@ -2,10 +2,8 @@ name: Run Slack Schedule Bot
 
 on:
   schedule:
-    # Runs Monday–Thursday at 9:00 AM EST (13:00 UTC)
-    - cron: '0 13 * * 1-4'
-    # Runs Friday at 2:47 PM EST (18:47 UTC)
-    - cron: '47 18 * * 5'
+    # Monday–Friday at 9:00 AM EST (13:00 UTC)
+    - cron: '0 13 * * 1-5'
   workflow_dispatch:  # Allows manual runs
 
 jobs:
