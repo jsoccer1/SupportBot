@@ -6,7 +6,7 @@ import pytz
 
 # 🔐 Use Slack bot token from environment variable
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-CHANNEL_ID = "C08PAJG9614"  # Replace with your actual channel ID
+CHANNEL_ID = "C07NHCHDAC8"  # Replace with your actual channel ID
 
 client = WebClient(token=SLACK_BOT_TOKEN)
 
