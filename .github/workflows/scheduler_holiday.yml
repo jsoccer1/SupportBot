@@ -1,4 +1,4 @@
-name: Run Slack Schedule Bot
+name: Run Slack Schedule Bot (holiday) 
 
 on:
   schedule:
