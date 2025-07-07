@@ -52,7 +52,10 @@ holiday_map = {
 
 # 🎄 Christmas Break (range check)
 def is_christmas_break(date):
-    return date >= datetime(date.year, 12, 22) and date <= datetime(date.year, 12, 26)
+    eastern = pytz.timezone("US/Eastern")
+    start = eastern.localize(datetime(date.year, 12, 22))
+    end = eastern.localize(datetime(date.year, 12, 26))
+    return start <= date <= end
 
 # 🛑 Send holiday message
 def holiday_message(name):
