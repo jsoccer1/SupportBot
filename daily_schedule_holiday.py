@@ -8,6 +8,12 @@ import pytz
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 CHANNEL_ID = "C08PAJG9614"  # Replace with your actual channel ID
 
+# ✅ Debug: Check if token is set
+if not SLACK_BOT_TOKEN:
+    print("❌ SLACK_BOT_TOKEN is not set!")
+else:
+    print("✅ SLACK_BOT_TOKEN loaded.")
+
 client = WebClient(token=SLACK_BOT_TOKEN)
 
 # 🧠 Helper to send message
@@ -16,7 +22,8 @@ def send_message(text):
         response = client.chat_postMessage(channel=CHANNEL_ID, text=text)
         print("✅ Message sent! Timestamp:", response["ts"])
     except SlackApiError as e:
-        print("❌ Error sending message:", e.response["error"])
+        print("❌ Slack API Error:")
+        print(e.response.data)
 
 # 🎭 Emoji Map
 emoji_map = {
@@ -50,6 +57,7 @@ def is_christmas_break(date):
 # 🛑 Send holiday message
 def holiday_message(name):
     message = f"📅 *{name.upper()} — HOLIDAY!* 🎉"
+    print(f"📨 Sending holiday message: {message}")
     send_message(message)
 
 # 🗓 Daily schedules
@@ -109,18 +117,21 @@ def main():
     eastern = pytz.timezone("US/Eastern")
     today = datetime.now(eastern)
     today_str = today.strftime("%m-%d")
+    weekday = today.strftime("%A")
 
-    # Check for fixed-date holidays
+    print(f"📆 Running schedule for {weekday} ({today_str})")
+
     if today_str in holiday_map:
+        print(f"🎉 Today is a fixed-date holiday: {holiday_map[today_str]}")
         holiday_message(holiday_map[today_str])
         return
 
-    # Check for Christmas Break
     if is_christmas_break(today):
+        print("🎄 Today falls within Christmas Break.")
         holiday_message("Christmas Break")
         return
 
-    weekday = today.strftime("%A")
+    print(f"🧾 Proceeding to send daily schedule for {weekday}")
 
     if weekday == "Monday":
         monday_schedule()
@@ -133,4 +144,7 @@ def main():
     elif weekday == "Friday":
         friday_schedule()
     else:
-        print("❌ No schedule to send today.")
+        print("❌ No schedule to send today (Weekend).")
+
+if __name__ == "__main__":
+    main()
