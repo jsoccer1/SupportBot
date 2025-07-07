@@ -28,30 +28,6 @@ emoji_map = {
     "Team Effort": "🤝"
 }
 
-# 🎉 Holiday Dates
-holiday_map = {
-    "01-01": "New Year's Day",
-    "01-20": "Martin Luther King Day",
-    "02-17": "Presidents' Day",
-    "04-18": "Good Friday",
-    "05-26": "Memorial Day",
-    "06-19": "Juneteenth",
-    "07-04": "Independence Day",
-    "09-01": "Labor Day",
-    "11-27": "Thanksgiving Day",
-    "11-28": "Friday after Thanksgiving",
-    "12-25": "Christmas Day",
-}
-
-# 🎄 Christmas Break (range check)
-def is_christmas_break(date):
-    return date >= datetime(date.year, 12, 22) and date <= datetime(date.year, 12, 26)
-
-# 🛑 Send holiday message
-def holiday_message(name):
-    message = f"📅 *{name.upper()} — HOLIDAY!* 🎉"
-    send_message(message)
-
 # 🗓 Daily schedules
 def monday_schedule():
     message = (
@@ -107,30 +83,20 @@ def friday_schedule():
 # 📆 Run the schedule for today
 def main():
     eastern = pytz.timezone("US/Eastern")
-    today = datetime.now(eastern)
-    today_str = today.strftime("%m-%d")
+    today = datetime.now(eastern).strftime("%A")
 
-    # Check for fixed-date holidays
-    if today_str in holiday_map:
-        holiday_message(holiday_map[today_str])
-        return
-
-    # Check for Christmas Break
-    if is_christmas_break(today):
-        holiday_message("Christmas Break")
-        return
-
-    weekday = today.strftime("%A")
-
-    if weekday == "Monday":
+    if today == "Monday":
         monday_schedule()
-    elif weekday == "Tuesday":
+    elif today == "Tuesday":
         tuesday_schedule()
-    elif weekday == "Wednesday":
+    elif today == "Wednesday":
         wednesday_schedule()
-    elif weekday == "Thursday":
+    elif today == "Thursday":
         thursday_schedule()
-    elif weekday == "Friday":
+    elif today == "Friday":
         friday_schedule()
     else:
         print("❌ No schedule to send today.")
+
+if __name__ == "__main__":
+    main()
