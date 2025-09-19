@@ -22,5 +22,5 @@ def send_message(text):
         exit(1)
 
 if __name__ == "__main__":
-    message = "Please send any weekly updates or highlights from this week as a reply :party_cat:"
+    message = "@here Please send any weekly updates or highlights from this week as a reply :party_cat:"
     send_message(message)
