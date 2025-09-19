@@ -4,7 +4,7 @@ from slack_sdk.errors import SlackApiError
 
 # 🔐 Slack token from GitHub Secrets (use SLACK_BOT_TOKEN secret)
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-CHANNEL_ID = "C08PAJG9614"  # Replace with your channel ID
+CHANNEL_ID = "C07NHCHDAC8"   # Replace with your channel ID
 
 if not SLACK_BOT_TOKEN:
     print("❌ SLACK_BOT_TOKEN is not set!")
