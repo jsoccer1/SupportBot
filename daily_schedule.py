@@ -24,7 +24,7 @@ emoji_map = {
     "Ryan": "🦈",
     "Taylor": "🐯",
     "Afnan": "🦌",
-    "Josh": "🐺"
+    "Josh": "🐑"
 }
 
 # 🗓 Daily schedules
